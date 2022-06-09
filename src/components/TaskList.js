@@ -9,20 +9,17 @@ function TaskList () {
   const [tasks, setTasks] = useState([]);
 
   const handleComplete = (taskId) => {
-    setTasks((state) => ({
-      ...state,
-      tasks: tasks.map((task) => {
+      setTasks((tasks) => tasks.map((task) => {
         if (task.id !== taskId) return task;
 
         return {
           ...task,
           isComplete: true
         };
-      })
-    }))
+      }));
 
-    setTimeout(() => this.handleRemove(taskId), 4000);
-  }
+    setTimeout(() => handleRemove(taskId), 4000);
+  };
 
   const handleRemove = (taskId) => {
     setTasks((state) =>({
@@ -37,10 +34,8 @@ function TaskList () {
       isComplete: false
     };
 
-    setTasks((state) => ({
-      ...state,
-      tasks: [newTask, ...tasks]
-    }))
+    //CL: I had this returning an object instead of an array. . . 
+    setTasks((tasks) => [newTask, ...tasks]);
   }
     return (
       <>
